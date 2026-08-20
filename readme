@@ -1,0 +1,25 @@
+# Interakt Webhook Fan-Out Service
+
+Receives webhook events from Interakt and forwards them simultaneously to:
+1. **Kylas** — native Interakt integration (preserves existing sync)
+2. **Make.com** — custom webhook for CTA tracking + TAT automation
+
+## Deployment Steps (Railway)
+
+1. Create a new GitHub repo called `interakt-fanout`
+2. Push these 3 files (`index.js`, `package.json`, `README.md`)
+3. In Railway dashboard → New Project → Deploy from GitHub Repo → select `interakt-fanout`
+4. Once deployed, go to Settings → Networking → Generate Domain (you'll get a URL like `interakt-fanout-production-xxxx.up.railway.app`)
+5. In Railway → Variables, add:
+   - `MAKE_WEBHOOK_URL` = your Make.com custom webhook URL
+6. In Interakt → Developer Settings → Configure Webhook URL → replace the current Kylas URL with:
+   `https://your-railway-domain.up.railway.app/webhook`
+7. Keep the same secret key — the service forwards it as-is
+
+## Testing
+
+After swapping the URL in Interakt:
+- Send a WhatsApp message to Clinderma's number
+- Check Railway logs — should show `KYLAS: 200` and `MAKE: 200`
+- Check Kylas — message should appear in lead timeline (sync intact)
+- Check Make.com — scenario should have fired
