@@ -11,7 +11,7 @@ const KYLAS_URL =
 // Replace this with your Make.com webhook URL after creating the scenario
 const MAKE_URL = process.env.MAKE_WEBHOOK_URL || "https://hook.eu2.make.com/YOUR_WEBHOOK_ID_HERE";
 // Destination 3: Make.com Glow Up Challenge webhook
-const MAKE_GLOWUP_URL = process.env.MAKE_WEBHOOK_URL_GLOWUP || "https://hook.eu1.make.com/t17rsaa48yxor4uxio5o1ffupcbrvmoa";
+const MAKE_GLOWUP_URL = process.env.MAKE_WEBHOOK_URL_GLOWUP || "https://hook.eu1.make.com/om4315tejp4ysn4gi8gw947mx73txd9h";
 // Health check
 app.get("/", (req, res) => {
   res.json({ status: "ok", service: "interakt-fanout" });
