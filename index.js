@@ -10,7 +10,8 @@ const KYLAS_URL =
 // Destination 2: Make.com custom webhook (CTA tracking + TAT)
 // Replace this with your Make.com webhook URL after creating the scenario
 const MAKE_URL = process.env.MAKE_WEBHOOK_URL || "https://hook.eu2.make.com/YOUR_WEBHOOK_ID_HERE";
-
+// Destination 3: Make.com Glow Up Challenge webhook
+const MAKE_GLOWUP_URL = process.env.MAKE_WEBHOOK_URL_GLOWUP || "https://hook.eu1.make.com/t17rsaa48yxor4uxio5o1ffupcbrvmoa";
 // Health check
 app.get("/", (req, res) => {
   res.json({ status: "ok", service: "interakt-fanout" });
@@ -40,7 +41,8 @@ app.post("/webhook", async (req, res) => {
   await Promise.allSettled([
     forward(KYLAS_URL, "KYLAS"),
     forward(MAKE_URL, "MAKE"),
-  ]);
+    forward(MAKE_GLOWUP_URL, "MAKE_GLOWUP"),
+ ]);
 });
 
 const PORT = process.env.PORT || 3000;
